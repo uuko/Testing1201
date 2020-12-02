@@ -6,13 +6,13 @@ import android.view.KeyEvent;
 import androidx.fragment.app.Fragment;
 
 public abstract class IOFragment extends Fragment {
-    public void onKeyDown(int keyCode, KeyEvent event) {
-
-        if ((keyCode == KeyEvent.KEYCODE_ENTER) ) {
-            Log.d("keyyyyyyyyyyyyyyy", "onKeyDown: "+keyCode);
-        }
-
-    }
+//    public void onKeyDown(int keyCode, KeyEvent event) {
+//
+//        if ((keyCode == KeyEvent.KEYCODE_ENTER) ) {
+//            Log.d("keyyyyyyyyyyyyyyy", "onKeyDown: "+keyCode);
+//        }
+//
+//    }
     public void setOnHeaderClick(){
 
     }

@@ -70,29 +70,29 @@ public class HeaderFragment extends HeaderIOFFragment implements IOnFocusListena
 
     }
 
-    public void onKeyDown(int keyCode, KeyEvent event,int id) {
-        Log.d("hhhhhhhhhhhhhhh", "onKeyDown: "+keyCode);
-        if ((keyCode == KeyEvent.KEYCODE_DPAD_DOWN) ) {
-            if (id==R.id.headerBtn){
-                Button settings=v.findViewById(R.id.privateBtn);
-                settings.requestFocus();
-                Log.d("hhhhhhhhhhhhhhh", "headerBtn onKeyDown: ");
-            }
-            else if (id==R.id.privateBtn){
-                Button button=v.findViewById(R.id.settingsBtn);
-                button.setFocusable(true);
-                button.setFocusableInTouchMode(true);
-                button.requestFocus();
-                button.getParent().requestChildFocus(button,button);
-                Log.d("hhhhhhhhhhhhhhh", "privateBtn onKeyDown: ");
-            }
-            else if (id==R.id.settingsBtn){
-                Log.d("hhhhhhhhhhhhhhh", "settingsBtn onKeyDown: ");
-            }
-
-        }
-
-    }
+//    public void onKeyDown(int keyCode, KeyEvent event,int id) {
+//        Log.d("hhhhhhhhhhhhhhh", "onKeyDown: "+keyCode);
+//        if ((keyCode == KeyEvent.KEYCODE_DPAD_DOWN) ) {
+//            if (id==R.id.headerBtn){
+//                Button settings=v.findViewById(R.id.privateBtn);
+//                settings.requestFocus();
+//                Log.d("hhhhhhhhhhhhhhh", "headerBtn onKeyDown: ");
+//            }
+//            else if (id==R.id.privateBtn){
+//                Button button=v.findViewById(R.id.settingsBtn);
+//                button.setFocusable(true);
+//                button.setFocusableInTouchMode(true);
+//                button.requestFocus();
+//                button.getParent().requestChildFocus(button,button);
+//                Log.d("hhhhhhhhhhhhhhh", "privateBtn onKeyDown: ");
+//            }
+//            else if (id==R.id.settingsBtn){
+//                Log.d("hhhhhhhhhhhhhhh", "settingsBtn onKeyDown: ");
+//            }
+//
+//        }
+//
+//    }
 
 
 }

@@ -72,13 +72,13 @@ public class PrivateFragment extends IOFragment {
 
     }
 
-    public void setFocusOnRecycleOne(boolean focusOnRecycleOne){
-        Log.d("7777777777777", "setFocusOnRecycleOne: "+focusOnRecycleOne);
-        this.focusOnRecycleOne=focusOnRecycleOne;
-        if (adapter!=null){
-            Log.d("7777777777777", "adapter!=null: "+focusOnRecycleOne);
-            adapter.setFocusOnOne(focusOnRecycleOne);
-        }
-
-    }
+//    public void setFocusOnRecycleOne(boolean focusOnRecycleOne){
+//        Log.d("7777777777777", "setFocusOnRecycleOne: "+focusOnRecycleOne);
+//        this.focusOnRecycleOne=focusOnRecycleOne;
+//        if (adapter!=null){
+//            Log.d("7777777777777", "adapter!=null: "+focusOnRecycleOne);
+//            adapter.setFocusOnOne(focusOnRecycleOne);
+//        }
+//
+//    }
 }

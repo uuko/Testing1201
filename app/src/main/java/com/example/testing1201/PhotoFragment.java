@@ -30,8 +30,6 @@ public class PhotoFragment extends IOFragment implements IOnFocusListenable {
         // Required empty public constructor
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +64,8 @@ public class PhotoFragment extends IOFragment implements IOnFocusListenable {
             list.add(new Data(String.valueOf(i),String.valueOf(i)));
         }
         adapter.setData(list);
+
+        v.setOnKeyListener(null);
     }
 
     @Override
@@ -73,13 +73,13 @@ public class PhotoFragment extends IOFragment implements IOnFocusListenable {
 
     }
 
-    public void onKeyDown(int keyCode, KeyEvent event) {
-
-        if ((keyCode == KeyEvent.KEYCODE_ENTER) ) {
-            Log.d("keyyyyyyyyyyyyyyy", "onKeyDown: "+keyCode);
-        }
-
-    }
+//    public void onKeyDown(int keyCode, KeyEvent event) {
+//
+//        if ((keyCode == KeyEvent.KEYCODE_ENTER) ) {
+//            Log.d("keyyyyyyyyyyyyyyy", "onKeyDown: "+keyCode);
+//        }
+//
+//    }
 
     public void setOnHeaderClick(){
        Button button=v.findViewById(R.id.button);

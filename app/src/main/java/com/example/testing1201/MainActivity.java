@@ -78,12 +78,12 @@ public class MainActivity extends FragmentActivity {
         customFrameLayout.setOnChildFocusListener(new CustomFrameLayout.OnChildFocusListener() {
             @Override
             public boolean onRequestFocusInDescendants(int direction, Rect previouslyFocusedRect) {
-                if (headerFragment.getView() != null && headerFragment.getView().requestFocus(direction, previouslyFocusedRect)) {
-                    return true;
-                }
-                if (photoFragment.getView() != null && photoFragment.getView().requestFocus(direction, previouslyFocusedRect)) {
-                    return true;
-                }
+//                if (headerFragment.getView() != null && headerFragment.getView().requestFocus(direction, previouslyFocusedRect)) {
+//                    return true;
+//                }
+//                if (photoFragment.getView() != null && photoFragment.getView().requestFocus(direction, previouslyFocusedRect)) {
+//                    return true;
+//                }
 
                 return false;
             }
@@ -101,9 +101,9 @@ public class MainActivity extends FragmentActivity {
                         TransitionManager.beginDelayedTransition((ViewGroup)headerContainer.getParent(), transition);
                         setMargins(headerContainer,-550,0,0,0);
                         setMargins(rowsContainer,0,0,0,0);
-                        if (currentFragment instanceof  IOFragment){
-                            ((IOFragment)currentFragment).setFocusOnRecycleOne(true);
-                        }
+//                        if (currentFragment instanceof  IOFragment){
+//                            ((IOFragment)currentFragment).setFocusOnRecycleOne(true);
+//                        }
 
                     } else if (childId == R.id.header_container) {
                         Log.d("vvvvvvvvvvv","headdddddddddddd");
@@ -114,9 +114,9 @@ public class MainActivity extends FragmentActivity {
                         headerContainer.setVisibility(View.VISIBLE);
                         setMargins(headerContainer,0,0,0,0);
                         setMargins(rowsContainer,600,0,0,0);
-                        if (currentFragment instanceof  IOFragment){
-                            ((IOFragment)currentFragment).setFocusOnRecycleOne(false);
-                        }
+//                        if (currentFragment instanceof  IOFragment){
+//                            ((IOFragment)currentFragment).setFocusOnRecycleOne(false);
+//                        }
                     }
 
                 }
@@ -131,16 +131,12 @@ public class MainActivity extends FragmentActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // TODO Auto-generated method stub
+        Log.d("jkeycodeit", "onKeyDown: "+keyCode);
+        fu=false;
         Log.d("jjjjjjjjjjjjjjjj", "onKeyDown: ");
         if (keyCode==KeyEvent.KEYCODE_DPAD_LEFT || keyCode==KeyEvent.KEYCODE_DPAD_RIGHT){
             fu=true;
             setupCustomFrameLayout();
-
-        }else {
-            fu=false;
-        }
-        if (keyCode==KeyEvent.KEYCODE_DPAD_CENTER){
-
         }
         else if (keyCode==KeyEvent.KEYCODE_BACK){
             View v= this.getCurrentFocus();
@@ -157,26 +153,26 @@ public class MainActivity extends FragmentActivity {
                 setMargins(rowsContainer,600,0,0,0);
 
             }
-
         }
-        else if (keyCode==KeyEvent.KEYCODE_DPAD_DOWN){
-            View v= this.getCurrentFocus();
-           if (((View)v.getParent().getParent()).getId()==R.id.header_frame){
-               FrameLayout llRootView = findViewById(R.id.rows_container);
-               llRootView.clearFocus();
-                ((HeaderIOFFragment) headerFragment).onKeyDown(keyCode, event,v.getId());
-               ((IOFragment)photoFragment).cleanAllFocus();
-            }
-
-
-            Log.d("aaaaaaaaaaa", "onKeyDown: "+v.getId());
-        }
+        return false;
+//        else if (keyCode==KeyEvent.KEYCODE_DPAD_DOWN){
+//            View v= this.getCurrentFocus();
+////           if (((View)v.getParent().getParent()).getId()==R.id.header_frame){
+////               FrameLayout llRootView = findViewById(R.id.rows_container);
+////               llRootView.clearFocus();
+//////                ((HeaderIOFFragment) headerFragment).onKeyDown(keyCode, event,v.getId());
+//////               ((IOFragment)photoFragment).cleanAllFocus();
+////            }
+//
+//
+//            Log.d("aaaaaaaaaaa", "onKeyDown: "+v.getId());
+//        }
 
 //        if(currentFragment instanceof IOnFocusListenable) {
 //            ((IOFragment) currentFragment).onKeyDown(keyCode, event);
 //            return true;
 //        }
-        return false;
+
     }
 
     public static void setMargins (View v, int l, int t, int r, int b) {
