@@ -30,7 +30,7 @@ public class PhotoFragment extends IOFragment implements IOnFocusListenable {
     public PhotoFragment() {
         // Required empty public constructor
     }
-
+    List<Data> list;
 
 
     @Override
@@ -63,8 +63,8 @@ public class PhotoFragment extends IOFragment implements IOnFocusListenable {
         recyclerView.setLayoutManager(new GridLayoutManager(v.getContext(),5));
          adapter=new MyAdapter(v.getContext());
         recyclerView.setAdapter(adapter);
-        List<Data> list=new ArrayList<>();
-        for (int i=0;i<20;i++){
+        list=new ArrayList<>();
+        for (int i=0;i<60;i++){
             list.add(new Data(String.valueOf(i),String.valueOf(i)));
         }
         adapter.setData(list);
@@ -114,7 +114,49 @@ public class PhotoFragment extends IOFragment implements IOnFocusListenable {
             }
             else {
                 Log.d("wwwwwwwwwwww", "qq: ");
+                if (position<list.size()){
+                    position=position+5;
+                    adapter.setChangePosition(position,true,1);
+                }
+
+            }
+        }
+        else if (keyCode==KeyEvent.KEYCODE_DPAD_LEFT){
+            Log.d("lllllllllllllll", "onKeyDown: ");
+            if (position<list.size()){
+                if (position>0){
+                    position=position-1;
+                }
+                else {position=0;}
+
                 adapter.setChangePosition(position,true,1);
+            }
+        }
+
+        else if (keyCode==KeyEvent.KEYCODE_DPAD_RIGHT){
+            if (!(position>=list.size())){
+                    position=position+1;
+                adapter.setChangePosition(position,true,1);
+            }
+        }
+
+        else if (keyCode==KeyEvent.KEYCODE_DPAD_UP){
+            if (position<list.size()){
+                if (position>=0){
+                    position=position-5;
+                    if (position<0){
+                        Log.d("position", "onKeyDown: "+position);
+                        Button button=v.findViewById(R.id.button);
+                        button.requestFocus();
+                    }
+                    else {
+                        adapter.setChangePosition(position,true,1);
+                    }
+                }
+
+
+
+
             }
         }
 

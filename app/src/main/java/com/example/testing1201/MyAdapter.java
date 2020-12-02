@@ -45,7 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void  setChangePosition(int position,boolean focusOnOne,int updownleftright){
         if (updownleftright==1){
 
-            this.position=position+5;
+            this.position=position;
             this.focusOnOne=focusOnOne;
             notifyDataSetChanged();
         }
@@ -75,6 +75,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public int getItemCount() {
         return data.size();
     }
+
 
     @Override
     public void onViewAttachedToWindow(@NonNull ViewHolder holder) {

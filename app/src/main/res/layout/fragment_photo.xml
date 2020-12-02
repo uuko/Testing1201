@@ -61,6 +61,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleview"
+                android:nextFocusDown="@+id/recycleview"
                 android:layout_width="@+id/guideline4"
                 android:layout_height="@+id/guideline2"
                 android:background="@color/colorPrimary"

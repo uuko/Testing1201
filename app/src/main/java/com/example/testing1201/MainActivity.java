@@ -136,16 +136,11 @@ public class MainActivity extends FragmentActivity {
         fu=false;
         if (keyCode==KeyEvent.KEYCODE_DPAD_LEFT ){
             View v= this.getCurrentFocus();
-            Transition transition = new Slide(Gravity.LEFT);
-            transition.setDuration(1000);
-            transition.addTarget(R.id.header_container);
-            TransitionManager.beginDelayedTransition((ViewGroup)headerContainer.getParent(), transition);
-            headerContainer.setVisibility(View.VISIBLE);
-            setMargins(headerContainer,0,0,0,0);
-            setMargins(rowsContainer,600,0,0,0);
+             if (((View)v.getParent().getParent()).getId()==R.id.photo_frame  || (((View)v.getParent().getParent().getParent().getParent()).getId()==R.id.photo_frame) ){
+//               ((HeaderIOFFragment) headerFragment).cleanAllFocus(v);
 
-            ((IOFragment)photoFragment).cleanAllFocus(v);
-            ((HeaderIOFFragment)headerFragment).setFocus(nowFocus);
+                ((IOFragment)photoFragment).onKeyDown(keyCode,event,v.getId());
+            }
 
         }
         else if (keyCode==KeyEvent.KEYCODE_DPAD_RIGHT){
@@ -164,6 +159,12 @@ public class MainActivity extends FragmentActivity {
                 }
             }
 
+            else  if (((View)v.getParent().getParent()).getId()==R.id.photo_frame  || (((View)v.getParent().getParent().getParent().getParent()).getId()==R.id.photo_frame) ){
+//               ((HeaderIOFFragment) headerFragment).cleanAllFocus(v);
+
+                ((IOFragment)photoFragment).onKeyDown(keyCode,event,v.getId());
+            }
+
 
         }
         else if (keyCode==KeyEvent.KEYCODE_BACK){
@@ -172,13 +173,16 @@ public class MainActivity extends FragmentActivity {
             if (
                     ((View)v.getParent().getParent()).getId()==R.id.photo_frame
                 || (((View)v.getParent().getParent().getParent().getParent()).getId()==R.id.photo_frame)){
-                Log.d("vvvvvvvvvvv","vvvvvvvvvvvvvv");
-                Transition transition = new Slide(Gravity.LEFT);
-                transition.setDuration(1000);
-                transition.addTarget(R.id.header_container);
-                TransitionManager.beginDelayedTransition((ViewGroup)headerContainer.getParent(), transition);
-                setMargins(headerContainer,0,0,0,0);
-                setMargins(rowsContainer,600,0,0,0);
+            Transition transition = new Slide(Gravity.LEFT);
+            transition.setDuration(1000);
+            transition.addTarget(R.id.header_container);
+            TransitionManager.beginDelayedTransition((ViewGroup)headerContainer.getParent(), transition);
+            headerContainer.setVisibility(View.VISIBLE);
+            setMargins(headerContainer,0,0,0,0);
+            setMargins(rowsContainer,600,0,0,0);
+
+            ((IOFragment)photoFragment).cleanAllFocus(v);
+            ((HeaderIOFFragment)headerFragment).setFocus(nowFocus);
 
             }
 
@@ -200,7 +204,11 @@ public class MainActivity extends FragmentActivity {
                 ((IOFragment)photoFragment).cleanAllFocus(v);
                 ((HeaderIOFFragment) headerFragment).onKeyDown(keyCode, event,v.getId());
             }
-            Log.d("aaaaaaaaaaa", "onKeyDown: "+v.getId());
+            else  if (((View)v.getParent().getParent()).getId()==R.id.photo_frame  || (((View)v.getParent().getParent().getParent().getParent()).getId()==R.id.photo_frame) ){
+//               ((HeaderIOFFragment) headerFragment).cleanAllFocus(v);
+
+                ((IOFragment)photoFragment).onKeyDown(keyCode,event,v.getId());
+            }
         }
 
 //        if(currentFragment instanceof IOnFocusListenable) {
@@ -291,4 +299,18 @@ public class MainActivity extends FragmentActivity {
     private void setNowFragment(){
         ((IOFragment)currentFragment).setOnHeaderClick();
     }
+
+
+    //left
+    //            View v= this.getCurrentFocus();
+//            Transition transition = new Slide(Gravity.LEFT);
+//            transition.setDuration(1000);
+//            transition.addTarget(R.id.header_container);
+//            TransitionManager.beginDelayedTransition((ViewGroup)headerContainer.getParent(), transition);
+//            headerContainer.setVisibility(View.VISIBLE);
+//            setMargins(headerContainer,0,0,0,0);
+//            setMargins(rowsContainer,600,0,0,0);
+//
+//            ((IOFragment)photoFragment).cleanAllFocus(v);
+//            ((HeaderIOFFragment)headerFragment).setFocus(nowFocus);
 }
