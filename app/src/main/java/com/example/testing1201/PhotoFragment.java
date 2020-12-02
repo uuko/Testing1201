@@ -24,8 +24,9 @@ import java.util.List;
 
 
 public class PhotoFragment extends IOFragment implements IOnFocusListenable {
-
+    private boolean focusOnRecycleOne=false;
     private View v;
+    private int position;
     public PhotoFragment() {
         // Required empty public constructor
     }
@@ -42,14 +43,15 @@ public class PhotoFragment extends IOFragment implements IOnFocusListenable {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v=inflater.inflate(R.layout.fragment_photo, container, false);
-        return v;
+
+        return inflater.inflate(R.layout.fragment_photo, container, false);
     }
 
     MyAdapter adapter ;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        v=view;
         getView().getViewTreeObserver().addOnWindowFocusChangeListener(new ViewTreeObserver.OnWindowFocusChangeListener() {
             @Override
             public void onWindowFocusChanged(final boolean hasFocus) {
@@ -73,24 +75,48 @@ public class PhotoFragment extends IOFragment implements IOnFocusListenable {
 
     }
 
-    public void onKeyDown(int keyCode, KeyEvent event) {
 
-        if ((keyCode == KeyEvent.KEYCODE_ENTER) ) {
-            Log.d("keyyyyyyyyyyyyyyy", "onKeyDown: "+keyCode);
-        }
-
-    }
 
     public void setOnHeaderClick(){
        Button button=v.findViewById(R.id.button);
         button.requestFocus();
 
     }
+    public void setFocusOnRecycleOne(boolean focusOnRecycleOne){
+        Log.d("7777777777777", "setFocusOnRecycleOne: "+focusOnRecycleOne);
+        this.focusOnRecycleOne=focusOnRecycleOne;
+        if (adapter!=null){
+            Log.d("7777777777777", "adapter!=null: "+focusOnRecycleOne);
+            adapter.setFocusOnOne(focusOnRecycleOne);
+        }
 
-    public void cleanAllFocus(){
+    }
+    public void cleanAllFocus(View v){
         Log.d("aayyyy", "cleanAllFocus: ");
         //v.cleanFocus
-        adapter.cleanFocus();
+        v.clearFocus();
+
+    }
+ /**
+    *  up -> 0
+    *  down -> 1
+    *  left -> 2
+    *  right -> 3
+    * */
+    public void onKeyDown(int keyCode, KeyEvent event,int id) {
+
+        if ((keyCode == KeyEvent.KEYCODE_DPAD_DOWN) ) {
+            Log.d("wwwwwwwwwwww", "qaaaaaaaaaaaaaq: ");
+            if (id==R.id.button){
+                Log.d("wwwwwwwwwwww", "onKeyDown: ");
+                position=4;
+                adapter.setFocusPosition(position,true);
+            }
+            else {
+                Log.d("wwwwwwwwwwww", "qq: ");
+                adapter.setChangePosition(position,true,1);
+            }
+        }
 
     }
 }

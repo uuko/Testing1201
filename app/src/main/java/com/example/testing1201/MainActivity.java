@@ -42,6 +42,7 @@ public class MainActivity extends FragmentActivity {
     private Context context;
     private RecyclerView recyclerView;
     boolean fu=false;
+    private View nowFocus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,14 +133,37 @@ public class MainActivity extends FragmentActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // TODO Auto-generated method stub
         Log.d("jjjjjjjjjjjjjjjj", "onKeyDown: ");
-        if (keyCode==KeyEvent.KEYCODE_DPAD_LEFT || keyCode==KeyEvent.KEYCODE_DPAD_RIGHT){
-            fu=true;
-            setupCustomFrameLayout();
+        fu=false;
+        if (keyCode==KeyEvent.KEYCODE_DPAD_LEFT ){
+            View v= this.getCurrentFocus();
+            Transition transition = new Slide(Gravity.LEFT);
+            transition.setDuration(1000);
+            transition.addTarget(R.id.header_container);
+            TransitionManager.beginDelayedTransition((ViewGroup)headerContainer.getParent(), transition);
+            headerContainer.setVisibility(View.VISIBLE);
+            setMargins(headerContainer,0,0,0,0);
+            setMargins(rowsContainer,600,0,0,0);
 
-        }else {
-            fu=false;
+            ((IOFragment)photoFragment).cleanAllFocus(v);
+            ((HeaderIOFFragment)headerFragment).setFocus(nowFocus);
+
         }
-        if (keyCode==KeyEvent.KEYCODE_DPAD_CENTER){
+        else if (keyCode==KeyEvent.KEYCODE_DPAD_RIGHT){
+            View v= this.getCurrentFocus();
+            if (((View)v.getParent().getParent()).getId()==R.id.header_frame){
+                Transition transition = new Slide(Gravity.LEFT);
+                transition.setDuration(1000);
+                transition.addTarget(R.id.header_container);
+                TransitionManager.beginDelayedTransition((ViewGroup)headerContainer.getParent(), transition);
+                setMargins(headerContainer,-550,0,0,0);
+                setMargins(rowsContainer,0,0,0,0);
+                if (photoFragment instanceof  IOFragment){
+                    nowFocus=this.getCurrentFocus();
+                    ((HeaderIOFFragment)headerFragment).cleanAllFocus(v);
+                    ((IOFragment)photoFragment).setOnHeaderClick();
+                }
+            }
+
 
         }
         else if (keyCode==KeyEvent.KEYCODE_BACK){
@@ -162,13 +186,20 @@ public class MainActivity extends FragmentActivity {
         else if (keyCode==KeyEvent.KEYCODE_DPAD_DOWN){
             View v= this.getCurrentFocus();
            if (((View)v.getParent().getParent()).getId()==R.id.header_frame){
-               FrameLayout llRootView = findViewById(R.id.rows_container);
-               llRootView.clearFocus();
+                ((IOFragment)photoFragment).cleanAllFocus(v);
                 ((HeaderIOFFragment) headerFragment).onKeyDown(keyCode, event,v.getId());
-               ((IOFragment)photoFragment).cleanAllFocus();
             }
-
-
+           else if (((View)v.getParent().getParent()).getId()==R.id.photo_frame  || (((View)v.getParent().getParent().getParent().getParent()).getId()==R.id.photo_frame) ){
+//               ((HeaderIOFFragment) headerFragment).cleanAllFocus(v);
+               ((IOFragment)photoFragment).onKeyDown(keyCode,event,v.getId());
+           }
+        }
+        else if (keyCode==KeyEvent.KEYCODE_DPAD_UP){
+            View v= this.getCurrentFocus();
+            if (((View)v.getParent().getParent()).getId()==R.id.header_frame){
+                ((IOFragment)photoFragment).cleanAllFocus(v);
+                ((HeaderIOFFragment) headerFragment).onKeyDown(keyCode, event,v.getId());
+            }
             Log.d("aaaaaaaaaaa", "onKeyDown: "+v.getId());
         }
 
@@ -176,7 +207,7 @@ public class MainActivity extends FragmentActivity {
 //            ((IOFragment) currentFragment).onKeyDown(keyCode, event);
 //            return true;
 //        }
-        return false;
+        return true;
     }
 
     public static void setMargins (View v, int l, int t, int r, int b) {

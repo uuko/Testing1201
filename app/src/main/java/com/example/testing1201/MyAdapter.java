@@ -20,6 +20,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     View view;
     private Context mContext;
     List<Data> data=new ArrayList<>();
+    private int position=0;
     private boolean focusOnOne=false;
     public MyAdapter(Context context) {
         this.mContext = context;
@@ -32,6 +33,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public void setFocusOnOne(boolean focusOnOne){
         this.focusOnOne=focusOnOne;
+
+    }
+
+    public void  setFocusPosition(int position,boolean focusOnOne){
+        this.position=position;
+        this.focusOnOne=focusOnOne;
+        notifyDataSetChanged();
+    }
+
+    public void  setChangePosition(int position,boolean focusOnOne,int updownleftright){
+        if (updownleftright==1){
+
+            this.position=position+5;
+            this.focusOnOne=focusOnOne;
+            notifyDataSetChanged();
+        }
+
 
     }
 
@@ -62,10 +80,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onViewAttachedToWindow(@NonNull ViewHolder holder) {
         super.onViewAttachedToWindow(holder);
         Log.d("7777777777", "onViewAttachedToWindow: "+holder.getAdapterPosition()+"ttttttt"+focusOnOne);
-        if (holder.getAdapterPosition()==0 && (focusOnOne)){
+//        if (holder.getAdapterPosition()==0 && (focusOnOne)){
+//            holder.itemView.requestFocus();
+//        }
+        if (holder.getAdapterPosition()==position && (focusOnOne)){
             holder.itemView.requestFocus();
         }
-
     }
 
 
